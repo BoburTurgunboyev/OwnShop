@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OwnShop.Domain.Entities.Products
+namespace OwnShop.Domain.Entities.Vendors
 {
-    public class Product
+    public class Vendor
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
     }
 }
