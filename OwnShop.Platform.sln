@@ -5,13 +5,13 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A9B03F56-A8F6-4F9D-84CD-87B3FD5049F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwnShop.Domain", "src\OwnShop.Domain\OwnShop.Domain.csproj", "{244E3BB1-55CA-4A30-AFB6-11407EB655A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OwnShop.Domain", "src\OwnShop.Domain\OwnShop.Domain.csproj", "{244E3BB1-55CA-4A30-AFB6-11407EB655A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwnShop.Service", "src\OwnShop.Service\OwnShop.Service.csproj", "{AA0BAB9D-B29F-465E-98F1-6002DA685537}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OwnShop.Service", "src\OwnShop.Service\OwnShop.Service.csproj", "{AA0BAB9D-B29F-465E-98F1-6002DA685537}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwnShop.WebApi", "src\OwnShop.WebApi\OwnShop.WebApi.csproj", "{52B32FC0-3600-4C8D-8349-56227AA4480C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OwnShop.WebApi", "src\OwnShop.WebApi\OwnShop.WebApi.csproj", "{52B32FC0-3600-4C8D-8349-56227AA4480C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OwnShop.DataAccess", "src\OwnShop.DataAccess\OwnShop.DataAccess.csproj", "{D751EA6F-BDB6-407B-93F8-3109A92B22A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OwnShop.DataAccess", "src\OwnShop.DataAccess\OwnShop.DataAccess.csproj", "{D751EA6F-BDB6-407B-93F8-3109A92B22A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,6 +9,6 @@ namespace OwnShop.Domain.Entities.Vendors
     public class Vendor
     {
         public long Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
     }
 }
