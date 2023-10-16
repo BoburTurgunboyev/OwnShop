@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OwnShop.Domain.Entities.Sales;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace OwnShop.Domain.Entities.Vendors
     {
         public long Id { get; set; }
         public string Name { get; set; } = string.Empty;
+
+        public ICollection<Sale> Sales { get; set; }
     }
 }

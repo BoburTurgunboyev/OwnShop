@@ -1,4 +1,8 @@
-﻿using System;
+﻿using OwnShop.Domain.Entities.Customers;
+using OwnShop.Domain.Entities.Products;
+using OwnShop.Domain.Entities.Shops;
+using OwnShop.Domain.Entities.Vendors;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +15,18 @@ namespace OwnShop.Domain.Entities.Sales
         public long Id { get; set; }
 
         public decimal SumToltal { get; set; }
+
+        public long CustomerId {  get; set; }   
+        public Customer Customer { get; set; }
+
+        public long VendorId { get; set; }
+        public Vendor Vendor { get; set; }
+
+        public long ShopId { get; set; }
+        public Shop Shop { get; set; }
+
+        public ICollection<Product> Products { get; set;}
+
+
     }
 }
