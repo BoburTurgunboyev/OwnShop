@@ -2,6 +2,7 @@
 using OwnShop.DataAccess.Data;
 using OwnShop.DataAccess.Interfaces.Customers;
 using OwnShop.Domain.Entities.Customers;
+using System.Runtime.InteropServices;
 
 namespace OwnShop.DataAccess.Repositories.Cotegories;
 
@@ -19,28 +20,38 @@ public class CostumerRepository : ICustomerRepository
         return await dbContext.Customers.CountAsync();
     }
 
-    public Task<int> CreateAsync(Customer repo)
+    public async Task<int> CreateAsync(Customer repo)
     {
-        throw new NotImplementedException();
+         await dbContext.Customers.AddAsync(repo);
+         return await dbContext.SaveChangesAsync();
+    }
+    
+
+    public async Task<bool> DeleteAsync(long id)
+    {
+        var costumer = await dbContext.Customers.FirstOrDefaultAsync(x => x.Id == id);
+        if (costumer is null)
+            return false;
+
+        dbContext.Customers.Remove(costumer);
+        await dbContext.SaveChangesAsync();
+        return true;
     }
 
-    public Task<int> DeleteAsync(long id)
+    public async Task<IList<Customer>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return  dbContext.Customers.ToList();
     }
 
-    public Task<IList<Customer>> GetAllAsync()
+    public async Task<Customer?> GetByIdAsync(long id)
     {
-        throw new NotImplementedException();
+       return await dbContext.Customers.FirstOrDefaultAsync(x=> x.Id==id);
+        
     }
 
-    public Task<Customer?> GetByIdAsync(long id)
+    public  async Task<int> UpdateAsync(long id, Customer repo)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> UpdateAsync(long id, Customer repo)
-    {
-        throw new NotImplementedException();
+        dbContext.Customers.Remove(repo);
+        return await dbContext.SaveChangesAsync();
     }
 }

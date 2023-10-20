@@ -12,7 +12,7 @@ namespace OwnShop.DataAccess.Interfaces
 
         public Task<int> UpdateAsync(long id, TRepo repo);
 
-        public Task<int> DeleteAsync(long id);
+        public Task<bool> DeleteAsync(long id);
 
         public Task<TViewModel?> GetByIdAsync(long id);
 
