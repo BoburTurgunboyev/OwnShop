@@ -19,34 +19,46 @@ namespace OwnShop.DataAccess.Repositories.Cotegories
         {
             this.appDbContext = appDbContext;
         }
+
         public async Task<int> CountAsync()
         {
-            return await appDbContext.Products.CountAsync();
+            return await appDbContext.Products.CountAsync();    
         }
 
-        public Task<int> CreateAsync(Product repo)
+        public async Task<int> CreateAsync(Product repo)
         {
-            throw new NotImplementedException();
+            await appDbContext.Products.AddAsync(repo);
+            return  appDbContext.SaveChanges();
         }
 
-        public Task<int> DeleteAsync(long id)
+        public async Task<bool> DeleteAsync(long id)
         {
-            throw new NotImplementedException();
+          var del = await appDbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
+            if(del is  null)
+            return false;
+
+            appDbContext.Products.Remove(del);  
+            await appDbContext.SaveChangesAsync();
+            return true;
+            
+            
         }
 
-        public Task<IList<Product>> GetAllAsync()
+        public async Task<IList<Product>> GetAllAsync()
         {
-            throw new NotImplementedException();
+           return await appDbContext.Products.ToListAsync();
         }
 
-        public Task<Product?> GetByIdAsync(long id)
+        public async Task<Product?> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            return await appDbContext.Products.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public Task<int> UpdateAsync(long id, Product repo)
         {
-            throw new NotImplementedException();
+            appDbContext.Products.Add(repo);
+            return appDbContext.SaveChangesAsync();
+            
         }
     }
 }

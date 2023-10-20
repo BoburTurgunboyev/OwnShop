@@ -18,34 +18,45 @@ namespace OwnShop.DataAccess.Repositories.Cotegories
         {
             this.appDbContext = appDbContext;
         }
-        public async Task<int> CountAsync()
+
+        public Task<int> CountAsync()
         {
-            return await appDbContext.Sales.CountAsync();
+            return appDbContext.Sales.CountAsync();
         }
 
         public Task<int> CreateAsync(Sale repo)
         {
-            throw new NotImplementedException();
+            appDbContext.Sales.Add(repo);
+            return appDbContext.SaveChangesAsync();
         }
 
-        public Task<int> DeleteAsync(long id)
+        public async Task<bool> DeleteAsync(long id)
         {
-            throw new NotImplementedException();
+            var del = await appDbContext.Sales.FirstOrDefaultAsync(x => x.Id == id);
+            if (del is null)
+                return false;
+
+
+            appDbContext.Sales.Remove(del);
+            await appDbContext.SaveChangesAsync();
+            return true;
+            
         }
 
-        public Task<IList<Sale>> GetAllAsync()
+        public async Task<IList<Sale>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return appDbContext.Sales.ToList();
         }
 
-        public Task<Sale?> GetByIdAsync(long id)
+        public async Task<Sale?> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            return await appDbContext.Sales.FirstOrDefaultAsync(x=>x.Id == id);
         }
 
-        public Task<int> UpdateAsync(long id, Sale repo)
+        public async Task<int> UpdateAsync(long id, Sale repo)
         {
-            throw new NotImplementedException();
+            appDbContext.Sales.Add(repo);
+            return await appDbContext.SaveChangesAsync();
         }
     }
 }

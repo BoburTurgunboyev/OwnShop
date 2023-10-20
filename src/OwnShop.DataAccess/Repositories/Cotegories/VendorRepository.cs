@@ -19,34 +19,43 @@ namespace OwnShop.DataAccess.Repositories.Cotegories
             this.appDbContext = appDbContext;   
         }
 
-        public async Task<int> CountAsync()
+        public Task<int> CountAsync()
         {
-            return await appDbContext.Vendors.CountAsync(); 
+            return appDbContext.Vendors.CountAsync();
         }
 
         public Task<int> CreateAsync(Vendor repo)
         {
-            throw new NotImplementedException();
+            appDbContext.Vendors.Add(repo);
+            return appDbContext.Vendors.CountAsync();
         }
 
-        public Task<int> DeleteAsync(long id)
+        public async Task<bool> DeleteAsync(long id)
         {
-            throw new NotImplementedException();
+            var del = await appDbContext.Vendors.FirstOrDefaultAsync(x => x.Id == id);
+            if (del is null)
+                return false;
+
+
+            appDbContext.Vendors.Remove(del);
+            await appDbContext.SaveChangesAsync();
+            return true;
         }
 
-        public Task<IList<Vendor>> GetAllAsync()
+        public async Task<IList<Vendor>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return appDbContext.Vendors.ToList();
         }
 
-        public Task<Vendor?> GetByIdAsync(long id)
+        public async Task<Vendor?> GetByIdAsync(long id)
         {
-            throw new NotImplementedException();
+            return await appDbContext.Vendors.FirstOrDefaultAsync(x=>x.Id == id);
         }
 
         public Task<int> UpdateAsync(long id, Vendor repo)
         {
-            throw new NotImplementedException();
+            appDbContext.Vendors.Add(repo);
+            return appDbContext.SaveChangesAsync();
         }
     }
 }
