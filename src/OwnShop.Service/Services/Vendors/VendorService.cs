@@ -1,4 +1,7 @@
-﻿using OwnShop.Domain.Entities.Vendors;
+﻿using OwnShop.DataAccess.Interfaces.Vendors;
+using OwnShop.Domain.Entities.Vendors;
+using OwnShop.Domain.Exceptions;
+using OwnShop.Domain.Exceptions.Vendors;
 using OwnShop.Service.Dtos.Vendors;
 using OwnShop.Service.Interfaces.Vendors;
 using System;
@@ -11,34 +14,62 @@ namespace OwnShop.Service.Service.Vendors
 {
     public class VendorService : IVendorService
     {
-        public Task<long> CountAsync()
+        private IVendorRepository _vendorRepository;
+
+        public VendorService(IVendorRepository vendorRepository) 
         {
-            throw new NotImplementedException();
+            this._vendorRepository = vendorRepository;
+            
         }
 
-        public Task<bool> CreateAsync(VendorDto dto)
+        public async Task<long> CountAsync()
         {
-            throw new NotImplementedException();
+           return await _vendorRepository.CountAsync();
+           
         }
 
-        public Task<bool> DeleteAsync(long vendorId)
+        public async Task<bool> CreateAsync(VendorDto dto)
         {
-            throw new NotImplementedException();
+            Vendor vendor = new Vendor()
+            {
+                Name = dto.Name
+            };
+            int result = await _vendorRepository.CreateAsync(vendor);
+            return result > 0;
+        }
+
+        public async Task<bool> DeleteAsync(long vendorId)
+        {
+            var vendor = _vendorRepository.GetByIdAsync(vendorId);
+            if (vendor == null) throw new VendorNotFound();
+
+            return await _vendorRepository.DeleteAsync(vendorId);
+            
         }
 
         public Task<IList<Vendor>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var result = _vendorRepository.GetAllAsync();
+            return result;
         }
 
         public Task<Vendor> GetByIdAsync(long vendorId)
         {
-            throw new NotImplementedException();
+            var vendor = _vendorRepository.GetByIdAsync(vendorId);
+            if(vendor == null) throw new VendorNotFound();
+            else return vendor;
         }
 
-        public Task<bool> UpdateAsync(long vendorId, VendorDto dto)
+        public async Task<bool> UpdateAsync(long vendorId, VendorDto dto)
         {
-            throw new NotImplementedException();
+            var result = await _vendorRepository.GetByIdAsync(vendorId);
+            if (result == null) throw new VendorNotFound();
+           
+             result.Name = dto.Name;
+            int vendor = await _vendorRepository.UpdateAsync(vendorId, result);
+            return vendor > 0;
+            
+            
         }
     }
 }
