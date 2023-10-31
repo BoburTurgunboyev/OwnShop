@@ -8,6 +8,6 @@ namespace OwnShop.Service.Dtos.Sales
 {
     public class SaleDto
     {
-        public decimal SumToltal { get; set; }
+        public decimal SumToltal { get; set;}
     }
 }

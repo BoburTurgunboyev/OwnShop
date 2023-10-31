@@ -1,5 +1,9 @@
-﻿using OwnShop.Domain.Entities.Customers;
+﻿using OwnShop.DataAccess.Interfaces.Customers;
+using OwnShop.Domain.Entities.Customers;
+using OwnShop.Domain.Exceptions.Customers;
+using OwnShop.Domain.Exceptions.Vendors;
 using OwnShop.Service.Dtos.Customers;
+using OwnShop.Service.Dtos.Vendors;
 using OwnShop.Service.Interfaces.Customers;
 using System;
 using System.Collections.Generic;
@@ -11,34 +15,66 @@ namespace OwnShop.Service.Service.Customers
 {
     public class CustomerService : ICustomersService
     {
-        public Task<bool> CountAsync()
+        private ICustomerRepository _customerRepository;
+
+        public CustomerService(ICustomerRepository customerRepository)
         {
-            throw new NotImplementedException();
+            this._customerRepository = customerRepository;
+        }
+        public async Task<bool> CountAsync()
+        {
+            var result = await _customerRepository.CountAsync();
+            return result > 0;
         }
 
-        public Task<bool> CreateAsync(CustomerDto dto)
+        public async Task<bool> CreateAsync(CustomerDto dto)
         {
-            throw new NotImplementedException();
+            Customer customer = new Customer()
+            {
+                Name = dto.Name,
+                PhoneNum = dto.PhoneNum,
+                Address = dto.Address,
+
+            };
+
+            var result = await _customerRepository.CreateAsync(customer);
+            return result > 0;
         }
 
-        public Task<bool> DeleateAsync(long customerId)
+        public async Task<bool> DeleateAsync(long customerId)
         {
-            throw new NotImplementedException();
+            var result = _customerRepository.GetByIdAsync(customerId);
+            if (result == null) throw new CustomerNotFound();
+
+            return await _customerRepository.DeleteAsync(customerId);
         }
 
-        public Task<IList<Customer>> GetAlldAsync()
+        public async Task<IList<Customer>> GetAlldAsync()
         {
-            throw new NotImplementedException();
+            return await _customerRepository.GetAllAsync();
         }
 
-        public Task<Customer> GetByIdAsync(long customerId)
+        public async Task<Customer> GetByIdAsync(long customerId)
         {
-            throw new NotImplementedException();
+            var result = await _customerRepository.GetByIdAsync(customerId);
+            return result;
         }
 
-        public Task<Customer> UpdateAsync(long customerId, CustomerDto dto)
+        public async Task<bool> UpdateAsync(long customerId, CustomerDto dto)
         {
-            throw new NotImplementedException();
+            var result = await _customerRepository.GetByIdAsync(customerId);
+            if (result == null) throw new CustomerNotFound();
+
+
+            result.Name = dto.Name;
+            result.PhoneNum = dto.PhoneNum;
+            result.Address = dto.Address;
+
+            int customer = await _customerRepository.UpdateAsync(customerId, result);
+
+            return customer > 0;
         }
+
+     
     }
 }

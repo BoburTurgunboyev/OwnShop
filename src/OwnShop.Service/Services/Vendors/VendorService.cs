@@ -53,9 +53,9 @@ namespace OwnShop.Service.Service.Vendors
             return result;
         }
 
-        public Task<Vendor> GetByIdAsync(long vendorId)
+        public async Task<Vendor> GetByIdAsync(long vendorId)
         {
-            var vendor = _vendorRepository.GetByIdAsync(vendorId);
+            var vendor = await  _vendorRepository.GetByIdAsync(vendorId);
             if(vendor == null) throw new VendorNotFound();
             else return vendor;
         }
@@ -67,7 +67,7 @@ namespace OwnShop.Service.Service.Vendors
            
              result.Name = dto.Name;
             int vendor = await _vendorRepository.UpdateAsync(vendorId, result);
-            return vendor > 0;
+            return vendor>0;
             
             
         }

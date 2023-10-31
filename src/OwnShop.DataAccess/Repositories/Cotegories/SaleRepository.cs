@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace OwnShop.DataAccess.Repositories.Cotegories
 {
-    internal class SaleRepository : ISaleRepository
+    internal class SaleRepository :ISaleRepository
     {
         private AppDbContext appDbContext;
 
-        public SaleRepository(AppDbContext appDbContext) 
+        public SaleRepository(AppDbContext appDbContext)
         {
             this.appDbContext = appDbContext;
         }
@@ -40,7 +40,7 @@ namespace OwnShop.DataAccess.Repositories.Cotegories
             appDbContext.Sales.Remove(del);
             await appDbContext.SaveChangesAsync();
             return true;
-            
+
         }
 
         public async Task<IList<Sale>> GetAllAsync()
@@ -50,13 +50,17 @@ namespace OwnShop.DataAccess.Repositories.Cotegories
 
         public async Task<Sale?> GetByIdAsync(long id)
         {
-            return await appDbContext.Sales.FirstOrDefaultAsync(x=>x.Id == id);
+            return await appDbContext.Sales.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<int> UpdateAsync(long id, Sale repo)
         {
-            appDbContext.Sales.Add(repo);
+            appDbContext.Sales.Update(repo);
+
             return await appDbContext.SaveChangesAsync();
+
+
         }
     }
+
 }

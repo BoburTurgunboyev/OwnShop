@@ -1,9 +1,14 @@
-﻿using OwnShop.Domain.Entities.Shops;
+﻿using OwnShop.DataAccess.Interfaces.Shops;
+using OwnShop.DataAccess.Repositories.Cotegories;
+using OwnShop.Domain.Entities.Shops;
+using OwnShop.Domain.Exceptions.Shops;
 using OwnShop.Service.Dtos.Shops;
 using OwnShop.Service.Interfaces.Shops;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,34 +16,64 @@ namespace OwnShop.Service.Service.Shops
 {
     public class ShopService : IShopService
     {
-        public Task<long> CountAsync()
+        private ShopRepository _shopRerpository;
+
+        public ShopService(ShopRepository shopRepository)
         {
-            throw new NotImplementedException();
+            this._shopRerpository = shopRepository;
+        }
+        public async  Task<long> CountAsync()
+        {
+           return await _shopRerpository.CountAsync();
         }
 
-        public Task<bool> CreateAsync(ShopDto dto)
+        public async Task<bool> CreateAsync(ShopDto dto)
         {
-            throw new NotImplementedException();
+            Shop shop = new Shop()
+            {
+                Name = dto.Name,
+                Address = dto.Address,
+                PhoneNum = dto.PhoneNum,
+            };
+
+            int result = await  _shopRerpository.CreateAsync(shop);
+            return result > 0;
+
         }
 
-        public Task<bool> DeleteAsync(long shopId)
+        public async Task<bool> DeleteAsync(long shopId)
         {
-            throw new NotImplementedException();
+            var result = _shopRerpository.GetByIdAsync(shopId);
+            if (result == null) throw new ShopNotFound();
+
+            return  await _shopRerpository.DeleteAsync(shopId); 
+
+           
         }
 
-        public Task<IList<Shop>> GetAllAsync()
+        public async Task<IList<Shop>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _shopRerpository.GetAllAsync();
         }
 
-        public Task<Shop> GetByIdAsync(long shopId)
+        public async Task<Shop> GetByIdAsync(long shopId)
         {
-            throw new NotImplementedException();
+            var result = await _shopRerpository.GetByIdAsync(shopId);
+            if(result == null) throw new ShopNotFound();
+            else return result;
         }
 
-        public Task<bool> UpdateAsync(long shopId, ShopDto dto)
+        public async Task<bool> UpdateAsync(long shopId, ShopDto dto)
         {
-            throw new NotImplementedException();
+            var result = await _shopRerpository.GetByIdAsync(shopId);
+            if( result == null) throw new ShopNotFound();
+
+            result.Name = dto.Name;
+            result.Address = dto.Address;
+            result.PhoneNum = dto.PhoneNum;
+            int shop = await _shopRerpository.UpdateAsync(shopId, result);
+
+            return shop > 0;
         }
     }
 }

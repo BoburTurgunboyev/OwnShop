@@ -17,7 +17,7 @@ namespace OwnShop.Service.Interfaces.Customers
         public Task<IList<Customer>> GetAlldAsync();
 
         public Task<Customer> GetByIdAsync(long customerId);
-        public Task<Customer> UpdateAsync(long customerId,CustomerDto dto);
+        public Task<bool> UpdateAsync(long customerId,CustomerDto dto);
 
     }
 }

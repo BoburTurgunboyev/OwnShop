@@ -56,7 +56,7 @@ namespace OwnShop.DataAccess.Repositories.Cotegories
 
         public Task<int> UpdateAsync(long id, Product repo)
         {
-            appDbContext.Products.Add(repo);
+            appDbContext.Products.Update(repo);
             return appDbContext.SaveChangesAsync();
             
         }

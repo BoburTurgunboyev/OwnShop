@@ -51,7 +51,7 @@ public class CostumerRepository : ICustomerRepository
 
     public  async Task<int> UpdateAsync(long id, Customer repo)
     {
-        dbContext.Customers.Remove(repo);
+        dbContext.Customers.Update(repo);
         return await dbContext.SaveChangesAsync();
     }
 }

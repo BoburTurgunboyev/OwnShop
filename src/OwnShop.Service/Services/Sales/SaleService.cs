@@ -1,44 +1,70 @@
-﻿using OwnShop.Domain.Entities.Sales;
+﻿using OwnShop.DataAccess.Interfaces.Sales;
+using OwnShop.Domain.Entities.Sales;
+using OwnShop.Domain.Exceptions.Sales;
+using OwnShop.Domain.Exceptions.Vendors;
 using OwnShop.Service.Dtos.Sales;
+using OwnShop.Service.Dtos.Vendors;
 using OwnShop.Service.Interfaces.Sales;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+ 
 namespace OwnShop.Service.Service.Sales
 {
     public class SaleService : ISaleService
     {
-        public Task<long> CountAsync()
+        private ISaleRepository _saleRepository;
+
+        public SaleService(ISaleRepository saleRepository)
         {
-            throw new NotImplementedException();
+            this._saleRepository = saleRepository;
+
         }
 
-        public Task<bool> CreateAsync(SaleDto dto)
+        public async Task<long> CountAsync()
         {
-            throw new NotImplementedException();
+            return await _saleRepository.CountAsync();
+           
         }
 
-        public Task<bool> DeleteAsync(long saleId)
+        public async  Task<bool> CreateAsync(SaleDto dto)
         {
-            throw new NotImplementedException();
+            Sale sale = new Sale()
+            {
+                SumToltal = dto.SumToltal,
+            };
+
+           int result = await _saleRepository.CreateAsync(sale);
+           return result > 0;
+        }
+
+        public async Task<bool> DeleteAsync(long saleId)
+        {
+            var result = _saleRepository.GetByIdAsync(saleId);
+            if (result == null) throw new SaleNotFound();
+
+            return  await _saleRepository.DeleteAsync(saleId);
         }
 
         public Task<IList<Sale>> GetAllAsync()
         {
-            throw new NotImplementedException();
+           return _saleRepository.GetAllAsync();    
         }
 
         public Task<Sale> GetByIdAsync(long saleId)
         {
-            throw new NotImplementedException();
+            var result = _saleRepository.GetByIdAsync(saleId);
+            if (result == null) throw new SaleNotFound();
+            else return result;
+
         }
 
-        public Task<bool> UpdateAsync(long saleId, SaleDto dto)
+        public async Task<bool> UpdateAsync(long saleId, SaleDto dto)
         {
-            throw new NotImplementedException();
+            var result = await _saleRepository.GetByIdAsync(saleId);
+            if (result == null) throw new SaleNotFound();
+
+            result.SumToltal = dto.SumToltal;
+            int sale = await _saleRepository.UpdateAsync(saleId, result);
+            return sale > 0;
         }
     }
 }
+
