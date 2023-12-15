@@ -11,8 +11,8 @@ using OwnShop.DataAccess.Data;
 namespace OwnShop.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231215153028_Initial71")]
-    partial class Initial71
+    [Migration("20231215160440_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
