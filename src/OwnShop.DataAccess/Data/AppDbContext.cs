@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OwnShop.DataAccess.Configrations;
 using OwnShop.Domain.Entities.Customers;
 using OwnShop.Domain.Entities.Products;
 using OwnShop.Domain.Entities.Sales;
@@ -26,6 +27,16 @@ namespace OwnShop.DataAccess.Data
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Shop> Shops { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new CustomerConfigration());
+            modelBuilder.ApplyConfiguration(new ProductConfigration());
+            modelBuilder.ApplyConfiguration(new SaleConfigration());
+            modelBuilder.ApplyConfiguration(new ShopConfigration());
+            modelBuilder.ApplyConfiguration(new  VendorConfigration());
+        }
 
     }
 }
