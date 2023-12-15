@@ -18,7 +18,8 @@ namespace OwnShop.Domain.Entities.Products
         public long CostumerId {  get; set; }
         public Customer Customer { get; set; }
 
-        public ICollection<Shop> Shops { get; set;}
+        public long ShopId { get; set; }
+        public Shop Shop { get; set; }
         public ICollection<Sale> Sales { get; set; }
     }
 }
