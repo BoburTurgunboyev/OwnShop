@@ -16,9 +16,9 @@ namespace OwnShop.Service.Service.Shops
 {
     public class ShopService : IShopService
     {
-        private ShopRepository _shopRerpository;
+        private readonly IShopRepository _shopRerpository;
 
-        public ShopService(ShopRepository shopRepository)
+        public ShopService(IShopRepository shopRepository)
         {
             this._shopRerpository = shopRepository;
         }
