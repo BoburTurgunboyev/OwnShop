@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OwnShop.DataAccess.Repositories.Cotegories
 {
-    internal class SaleRepository :ISaleRepository
+    public class SaleRepository :ISaleRepository
     {
         private AppDbContext appDbContext;
 
