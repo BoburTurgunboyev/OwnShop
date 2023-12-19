@@ -34,8 +34,9 @@ public class CostumerRepository : ICustomerRepository
             return false;
 
         dbContext.Customers.Remove(costumer);
-        await dbContext.SaveChangesAsync();
-        return true;
+        var res = await dbContext.SaveChangesAsync();
+        return res > 0;
+        
     }
 
     public async Task<IList<Customer>> GetAllAsync()
