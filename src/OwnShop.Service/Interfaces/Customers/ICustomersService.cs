@@ -11,13 +11,13 @@ namespace OwnShop.Service.Interfaces.Customers
     public interface ICustomersService
     {
         public Task<bool> CreateAsync(CustomerDto dto);
-        public Task<bool> DeleateAsync(long customerId);
+        public Task<bool> DeleateAsync(long Id);
 
-        public Task<bool> CountAsync();
+        public Task<int> CountAsync();
         public Task<IList<Customer>> GetAlldAsync();
 
         public Task<Customer> GetByIdAsync(long customerId);
-        public Task<bool> UpdateAsync(long customerId,CustomerDto dto);
+        public Task<bool> UpdateCustomerAsync(long customerId,CustomerDto dto);
 
     }
 }

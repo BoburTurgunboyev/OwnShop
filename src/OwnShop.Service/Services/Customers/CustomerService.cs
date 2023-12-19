@@ -21,10 +21,12 @@ namespace OwnShop.Service.Service.Customers
         {
             this._customerRepository = customerRepository;
         }
-        public async Task<bool> CountAsync()
+        public async Task<int> CountAsync()
         {
-            var result = await _customerRepository.CountAsync();
-            return result > 0;
+            var result = await _customerRepository.GetAllAsync();
+            return result.Count;
+
+            
         }
 
         public async Task<bool> CreateAsync(CustomerDto dto)
@@ -41,12 +43,11 @@ namespace OwnShop.Service.Service.Customers
             return result > 0;
         }
 
-        public async Task<bool> DeleateAsync(long customerId)
-        {
-            var result = _customerRepository.GetByIdAsync(customerId);
-            if (result == null) throw new CustomerNotFound();
+        public async Task<bool> DeleateAsync(long id) { 
 
-            return await _customerRepository.DeleteAsync(customerId);
+            var res =await _customerRepository.DeleteAsync(id);
+            return res;
+
         }
 
         public async Task<IList<Customer>> GetAlldAsync()
@@ -60,7 +61,7 @@ namespace OwnShop.Service.Service.Customers
             return result;
         }
 
-        public async Task<bool> UpdateAsync(long customerId, CustomerDto dto)
+        public async Task<bool> UpdateCustomerAsync(long customerId, CustomerDto dto)
         {
             var result = await _customerRepository.GetByIdAsync(customerId);
             if (result == null) throw new CustomerNotFound();
