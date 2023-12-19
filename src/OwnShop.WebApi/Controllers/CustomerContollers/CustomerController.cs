@@ -18,7 +18,7 @@ namespace OwnShop.WebApi.Controllers.CustomerContollers
 
         [HttpGet]
 
-        public async ValueTask<IActionResult> GetAll()
+        public async ValueTask<IActionResult> GetAllCustomer()
         {
             var res = await _customersService.GetAlldAsync();
             return Ok(res);
@@ -29,6 +29,36 @@ namespace OwnShop.WebApi.Controllers.CustomerContollers
         public async ValueTask<IActionResult> CreateCustomer(CustomerDto customerDto)
         {
             var res = await _customersService.CreateAsync(customerDto);
+            return Ok(res);
+        }
+
+        [HttpGet]
+
+        public async ValueTask<IActionResult> GetBIdCustomer(long id)
+        {
+            var result = await _customersService.GetByIdAsync(id);
+            return Ok(result);
+        }
+        [HttpPut]
+
+        public async ValueTask<IActionResult> UpdateCustomer(long id ,CustomerDto customerDto)
+        {
+            var res = await _customersService.UpdateCustomerAsync(id,customerDto);
+            return Ok(res);
+        }
+
+        [HttpDelete]
+
+        public async ValueTask<IActionResult> DeleteCustomer(long id)
+        {
+            var res = await _customersService.DeleateAsync(id);
+            return Ok(res);
+        }
+
+        [HttpGet]
+        public async ValueTask<IActionResult> CountCustomer()
+        {
+            var res = await _customersService.CountAsync();
             return Ok(res);
         }
     }
