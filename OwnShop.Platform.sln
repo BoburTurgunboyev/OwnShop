@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OwnShop.WebApi", "src\OwnSh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OwnShop.DataAccess", "src\OwnShop.DataAccess\OwnShop.DataAccess.csproj", "{D751EA6F-BDB6-407B-93F8-3109A92B22A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JwtTokken", "JwtTokken\JwtTokken.csproj", "{D394B654-D8C1-4E13-B995-98BD033DC1B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{D751EA6F-BDB6-407B-93F8-3109A92B22A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D751EA6F-BDB6-407B-93F8-3109A92B22A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D751EA6F-BDB6-407B-93F8-3109A92B22A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D394B654-D8C1-4E13-B995-98BD033DC1B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D394B654-D8C1-4E13-B995-98BD033DC1B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D394B654-D8C1-4E13-B995-98BD033DC1B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D394B654-D8C1-4E13-B995-98BD033DC1B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +50,7 @@ Global
 		{AA0BAB9D-B29F-465E-98F1-6002DA685537} = {A9B03F56-A8F6-4F9D-84CD-87B3FD5049F3}
 		{52B32FC0-3600-4C8D-8349-56227AA4480C} = {A9B03F56-A8F6-4F9D-84CD-87B3FD5049F3}
 		{D751EA6F-BDB6-407B-93F8-3109A92B22A7} = {A9B03F56-A8F6-4F9D-84CD-87B3FD5049F3}
+		{D394B654-D8C1-4E13-B995-98BD033DC1B7} = {A9B03F56-A8F6-4F9D-84CD-87B3FD5049F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98DD8A19-3C9F-4ED6-BB5A-AE321B9B69EF}
