@@ -13,7 +13,7 @@ namespace OwnShop.Domain.Entities.Products
     {
         public long Id { get; set; }
         public string Name { get; set; } = string.Empty;    
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         public long CostumerId {  get; set; }
         public Customer Customer { get; set; }
