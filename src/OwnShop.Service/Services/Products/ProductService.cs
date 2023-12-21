@@ -3,11 +3,6 @@ using OwnShop.Domain.Entities.Products;
 using OwnShop.Domain.Exceptions.Products;
 using OwnShop.Service.Dtos.Products;
 using OwnShop.Service.Interfaces.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OwnShop.Service.Service.Products
 {
@@ -15,13 +10,15 @@ namespace OwnShop.Service.Service.Products
     {
         private IProductRepository _productRepository;
 
-        public ProductService(IProductRepository productRepository) 
+        public ProductService(IProductRepository productRepository)
         {
             this._productRepository = productRepository;
         }
         public async Task<long> CountAsync()
         {
-           return await _productRepository.CountAsync();
+            var res = await _productRepository.GetAllAsync();
+            return res.Count;
+
         }
 
         public async Task<bool> CreateAsync(ProductDto dto)
@@ -30,6 +27,8 @@ namespace OwnShop.Service.Service.Products
             {
                 Name = dto.Name,
                 Price = dto.Price,
+                CostumerId = dto.CostumerId,
+                ShopId= dto.ShopId,
 
             };
 
@@ -38,12 +37,12 @@ namespace OwnShop.Service.Service.Products
             return result > 0;
         }
 
-        public Task<bool> DeleteASync(long productId)
+        public Task<bool> DeletePASync(long productId)
         {
             var result = _productRepository.GetByIdAsync(productId);
             if (result == null) throw new ProductNotFoundException();
-            
-            var del =_productRepository.DeleteAsync(productId);
+
+            var del = _productRepository.DeleteAsync(productId);
             return del;
         }
 
@@ -66,8 +65,10 @@ namespace OwnShop.Service.Service.Products
 
             result.Name = dto.Name;
             result.Price = dto.Price;
-            
-            var product = await _productRepository.UpdateAsync(productId,result);
+            result.CostumerId = dto.CostumerId;
+            result.ShopId = dto.ShopId;
+
+            var product  = await _productRepository.UpdateAsync(productId, result);
             return product > 0;
 
         }
