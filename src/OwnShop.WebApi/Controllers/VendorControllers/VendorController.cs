@@ -5,7 +5,7 @@ using OwnShop.Service.Interfaces.Vendors;
 
 namespace OwnShop.WebApi.Controllers.VendorControllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class VendorController : ControllerBase
     {
@@ -54,6 +54,10 @@ namespace OwnShop.WebApi.Controllers.VendorControllers
         }
 
         [HttpGet]
-
+        public async ValueTask<IActionResult> CountVendor()
+        {
+            var res = await _vendorService.CountAsync();
+            return Ok(res);
+        }
     }
 }
