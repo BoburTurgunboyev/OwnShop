@@ -13,6 +13,8 @@
 
   <ItemGroup>
 	  
+    <ProjectReference Include="..\..\JwtTokken\JwtTokken.csproj" />
+	  
     <ProjectReference Include="..\OwnShop.Service\OwnShop.Service.csproj" />
   </ItemGroup>
 
