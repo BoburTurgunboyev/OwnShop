@@ -19,13 +19,15 @@ namespace OwnShop.Domain.Entities.Sales
         public long CustomerId {  get; set; }   
         public Customer Customer { get; set; }
 
+
         public long VendorId { get; set; }
         public Vendor Vendor { get; set; }
 
         public long ShopId { get; set; }
         public Shop Shop { get; set; }
 
-        public ICollection<Product> Products { get; set;}
+        public long ProductId {  get; set; }
+        public Product Product { get; set; }    
 
 
     }
