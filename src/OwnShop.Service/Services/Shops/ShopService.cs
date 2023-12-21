@@ -43,11 +43,11 @@ namespace OwnShop.Service.Service.Shops
 
         public async Task<bool> DeleteAsync(long shopId)
         {
-            var result = _shopRerpository.GetByIdAsync(shopId);
+            var result = await _shopRerpository.GetByIdAsync(shopId);
             if (result == null) throw new ShopNotFound();
 
-            return  await _shopRerpository.DeleteAsync(shopId); 
-
+            var res = await _shopRerpository.DeleteAsync(shopId);
+            return res;
            
         }
 
