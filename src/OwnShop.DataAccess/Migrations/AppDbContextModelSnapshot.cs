@@ -91,6 +91,9 @@ namespace OwnShop.DataAccess.Migrations
                     b.Property<long>("CustomerId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("ShopId")
                         .HasColumnType("bigint");
 
@@ -103,6 +106,8 @@ namespace OwnShop.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
+
+                    b.HasIndex("ProductId");
 
                     b.HasIndex("ShopId");
 
@@ -157,21 +162,6 @@ namespace OwnShop.DataAccess.Migrations
                     b.ToTable("Vendors");
                 });
 
-            modelBuilder.Entity("ProductSale", b =>
-                {
-                    b.Property<long>("ProductsId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("SalesId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("ProductsId", "SalesId");
-
-                    b.HasIndex("SalesId");
-
-                    b.ToTable("ProductSale");
-                });
-
             modelBuilder.Entity("OwnShop.Domain.Entities.Products.Product", b =>
                 {
                     b.HasOne("OwnShop.Domain.Entities.Customers.Customer", "Customer")
@@ -199,6 +189,12 @@ namespace OwnShop.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
+                    b.HasOne("OwnShop.Domain.Entities.Products.Product", "Product")
+                        .WithMany("Sales")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("OwnShop.Domain.Entities.Shops.Shop", "Shop")
                         .WithMany("Sales")
                         .HasForeignKey("ShopId")
@@ -213,30 +209,22 @@ namespace OwnShop.DataAccess.Migrations
 
                     b.Navigation("Customer");
 
+                    b.Navigation("Product");
+
                     b.Navigation("Shop");
 
                     b.Navigation("Vendor");
-                });
-
-            modelBuilder.Entity("ProductSale", b =>
-                {
-                    b.HasOne("OwnShop.Domain.Entities.Products.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("OwnShop.Domain.Entities.Sales.Sale", null)
-                        .WithMany()
-                        .HasForeignKey("SalesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("OwnShop.Domain.Entities.Customers.Customer", b =>
                 {
                     b.Navigation("Products");
 
+                    b.Navigation("Sales");
+                });
+
+            modelBuilder.Entity("OwnShop.Domain.Entities.Products.Product", b =>
+                {
                     b.Navigation("Sales");
                 });
 
