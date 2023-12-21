@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OwnShop.Service.Dtos.Vendors;
 using OwnShop.Service.Interfaces.Vendors;
 
 namespace OwnShop.WebApi.Controllers.VendorControllers
@@ -21,5 +22,30 @@ namespace OwnShop.WebApi.Controllers.VendorControllers
             var res = await _vendorService.GetAllAsync();
             return Ok(res);
         }
+
+        [HttpPost]
+
+        public async ValueTask<IActionResult> CreateVendor(VendorDto vendor)
+        {
+            var res = await _vendorService.CreateAsync(vendor);
+            return Ok(res);
+        }
+
+        [HttpGet]
+        public async ValueTask<IActionResult> GetByIdVendor(int id)
+        {
+            var res = await _vendorService.GetByIdAsync(id);
+            return Ok(res);
+        }
+
+        [HttpPut]
+        public async ValueTask<IActionResult> UpdateVendor(long id,VendorDto vendor) 
+        {
+            var res = await _vendorService.UpdateAsync(id, vendor); 
+            return Ok(res);
+
+        }
+
+
     }
 }
