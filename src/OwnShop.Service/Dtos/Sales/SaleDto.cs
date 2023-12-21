@@ -9,5 +9,9 @@ namespace OwnShop.Service.Dtos.Sales
     public class SaleDto
     {
         public decimal SumToltal { get; set;}
+        public long ProductId { get; set; }
+        public long ShopId { get; set; }
+        public long VendorId { get; set; }
+        public long CustomerId { get; set; }
     }
 }
