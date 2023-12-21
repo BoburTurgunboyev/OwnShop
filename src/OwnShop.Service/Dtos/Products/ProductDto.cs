@@ -9,6 +9,8 @@ namespace OwnShop.Service.Dtos.Products
     public class ProductDto
     {
           public string Name { get; set; } = string.Empty;    
-          public decimal Price { get; set; }
+          public int Price { get; set; }
+          public long CostumerId { get; set; }
+          public long ShopId { get; set; }
     }
 }
