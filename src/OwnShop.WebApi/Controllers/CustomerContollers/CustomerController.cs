@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OwnShop.Domain.Entities.Customers;
 using OwnShop.Service.Dtos.Customers;
 using OwnShop.Service.Interfaces.Customers;
 
@@ -17,7 +19,7 @@ namespace OwnShop.WebApi.Controllers.CustomerContollers
         }
 
         [HttpGet]
-
+        [Authorize(Roles = "Customer")]
         public async ValueTask<IActionResult> GetAllCustomer()
         {
             var res = await _customersService.GetAlldAsync();
