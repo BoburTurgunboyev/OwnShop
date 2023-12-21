@@ -46,6 +46,14 @@ namespace OwnShop.WebApi.Controllers.VendorControllers
 
         }
 
+        [HttpDelete]
+        public async ValueTask<IActionResult> DeleteVendor(long id)
+        {
+            var res = await _vendorService.DeleteAsync(id);
+            return Ok(res);
+        }
+
+        [HttpGet]
 
     }
 }
