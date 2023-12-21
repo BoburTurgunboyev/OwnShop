@@ -36,6 +36,8 @@ namespace OwnShop.Service.Service.Customers
                 Name = dto.Name,
                 PhoneNum = dto.PhoneNum,
                 Address = dto.Address,
+                Role = dto.Role,
+                Password = dto.Password,
 
             };
 
@@ -70,6 +72,8 @@ namespace OwnShop.Service.Service.Customers
             result.Name = dto.Name;
             result.PhoneNum = dto.PhoneNum;
             result.Address = dto.Address;
+            result.Role = dto.Role;
+            result.Password = dto.Password;
 
             int customer = await _customerRepository.UpdateAsync(customerId, result);
 
