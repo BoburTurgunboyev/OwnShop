@@ -29,6 +29,10 @@ namespace OwnShop.Service.Service.Sales
             Sale sale = new Sale()
             {
                 SumToltal = dto.SumToltal,
+                CustomerId = dto.CustomerId,
+                ProductId = dto.ProductId,
+                ShopId = dto.ShopId,
+                VendorId = dto.VendorId,
             };
 
            int result = await _saleRepository.CreateAsync(sale);

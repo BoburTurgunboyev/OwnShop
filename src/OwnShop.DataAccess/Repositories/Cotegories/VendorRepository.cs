@@ -27,7 +27,7 @@ namespace OwnShop.DataAccess.Repositories.Cotegories
         public Task<int> CreateAsync(Vendor repo)
         {
             appDbContext.Vendors.Add(repo);
-            return appDbContext.Vendors.CountAsync();
+            return appDbContext.SaveChangesAsync();
         }
 
         public async Task<bool> DeleteAsync(long id)
