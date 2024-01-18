@@ -13,7 +13,6 @@ namespace OwnShop.Domain.Entities.Sales
     public class Sale
     {
         public long Id { get; set; }
-
         public decimal SumToltal { get; set; }
 
         public long CustomerId {  get; set; }   
